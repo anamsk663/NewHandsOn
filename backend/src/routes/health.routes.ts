@@ -1,11 +1,8 @@
 import { Router } from "express";
+import { healthCheck } from "../controllers/health.controller.js";
 
 const router = Router();
 
-router.get("/", (_req, res) => {
-  res.json({
-    message: "Handson API is running ",
-  });
-});
+router.get("/", healthCheck);
 
 export default router;
