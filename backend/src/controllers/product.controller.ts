@@ -16,7 +16,7 @@ export const createProduct = async (req: Request, res: Response) => {
 
 export const getProducts = async (_req: Request, res: Response) => {
   try {
-    const products = await Product.find();
+    const products = await Product.find().populate("category");
 
     res.status(200).json(products);
   } catch (error) {
