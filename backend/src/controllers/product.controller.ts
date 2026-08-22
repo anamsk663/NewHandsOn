@@ -1,8 +1,17 @@
 import { Request, Response } from "express";
 import Product from "../models/product.model.js";
+import Category from "../models/category.model.js";
 
 export const createProduct = async (req: Request, res: Response) => {
   try {
+    const category = await Category.findById(req.body.category);
+
+    if (!category) {
+      return res.status(404).json({
+        message: "Category not found",
+      });
+    }
+
     const product = await Product.create(req.body);
 
     res.status(201).json(product);
